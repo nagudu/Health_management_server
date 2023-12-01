@@ -11,16 +11,25 @@ import validateLoginForm from '../validation/login';
 
 // create user
 const create = (req, res) => {
-  const { errors, isValid } = validateRegisterForm(req.body);
-  let { 
-    firstname, 
-    lastname, 
-    username, 
-    role,
-    email, 
-    password,
-  } = req.body;
+  const isValid = true;
+  const errors = {};
 
+  let { 
+    firstname="", 
+    lastname="",
+    middlename="",
+    gender="",
+    state="",
+    dob="",
+    phone="",
+    status="",
+    address="", 
+    username="", 
+    role="",
+    email="", 
+    password="",
+  } = req.body;
+console.log(req.body)
   // check validation
   if(!isValid) {
     return res.status(400).json(errors);
@@ -33,8 +42,15 @@ const create = (req, res) => {
       let newUser = { 
         firstname, 
         lastname, 
+        middlename,
         username, 
+        state,
+        gender,
+        dob,
+        phone,
         role,
+        status,
+        address,
         email, 
         password, 
       };
