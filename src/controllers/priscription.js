@@ -11,8 +11,8 @@ export const priscription = (req, res) => {
         replacements: {
           title,
           priscription,
-          patient_id: 0, 
-          doctor_id: 0
+          patient_id: parseInt(patient_id), 
+          doctor_id: parseInt(doctor_id)
         },
       }
     )
