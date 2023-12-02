@@ -36,8 +36,8 @@ export const getAppointment = (req,res)=>{
 }
 
 export const getUsers = (req,res)=>{
-
-    db.sequelize.query(`SELECT * FROM users`)
+      const {status}=req.query;
+    db.sequelize.query(`SELECT * FROM users where role = "${status}"`)
     .then((resp)=>res.json({success:true,resp}))
     .catch(
         (err)=>{
@@ -52,6 +52,20 @@ export const updateAppointment =(req,res)=>{
     const {id=0}=req.body;
 
     db.sequelize.query(`update appointment set status='approved' where id=${id}`)
+    .then((resp)=>res.json({success:true,resp}))
+    .catch(
+        (err)=>{
+            console.log(err);
+            res.status(500).json({err,msg:'ann erro occured'})
+        }
+    )
+}
+
+export const updateUsers =(req,res)=>{
+
+    const {id=0}=req.body;
+
+    db.sequelize.query(`update users set status='approved' where id=${id}`)
     .then((resp)=>res.json({success:true,resp}))
     .catch(
         (err)=>{
